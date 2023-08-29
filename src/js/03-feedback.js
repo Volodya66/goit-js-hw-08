@@ -6,12 +6,12 @@ const form = document.querySelector('.feedback-form');
 
 const userEmail = form.querySelector('input[type="email"]');
 const userMessage = form.querySelector('textarea[name="message"]');
-
-console.log(userMessage);
+const availabilityOfData = localStorage.getItem('feedback-form-state');
+console.log(availabilityOfData);
 console.log(userEmail);
 
 // ! присутність даних в локальному сховищі 
-const availabilityOfData = localStorage.getItem('feedback-form-state');
+
 if (availabilityOfData !== null) {
     const data = JSON.parse(availabilityOfData);
     const { email, message } = data;
@@ -40,9 +40,13 @@ form.addEventListener("submit", noSubForm)
 function noSubForm(evt) {
     evt.preventDefault();
 
-    console.log(JSON.parse(availabilityOfData));
-
-    localStorage.removeItem('feedback-form-state')
+    const formData = {
+            email: userMessage.value,
+            message: userMessage.value,
+        };
+        console.log(formData);
+    localStorage.removeItem('feedback-form-state');
     userEmail.value = "";
     userMessage.value = "";
-}
+    
+};
